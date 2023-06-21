@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eTickets.Controllers
@@ -20,7 +21,11 @@ namespace eTickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<Movie> allMovies = await _context.MOVIES.ToListAsync();
+            List<Movie> allMovies = await _context.MOVIES
+                .Include(c => c.Cinema)
+                .OrderBy(n => n.Name)
+                .ToListAsync();
+
             return View(allMovies);
         }
     }
