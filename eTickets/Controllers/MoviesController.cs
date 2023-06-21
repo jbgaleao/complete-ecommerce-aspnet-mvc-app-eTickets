@@ -21,7 +21,7 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Index()
         {
             List<Movie> allMovies = await _context.MOVIES.ToListAsync();
-            return View();
+            return View(allMovies);
         }
     }
 }
