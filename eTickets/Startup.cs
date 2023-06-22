@@ -30,7 +30,10 @@ namespace eTickets
 
 
             #region SERVICES CONFIGURATIONS
+
             services.AddScoped<IActorsService, ActorService>();
+            services.AddScoped<IProducersService, ProducersService>();
+
             #endregion
 
 

@@ -1,13 +1,14 @@
-﻿@model Actor
+﻿@model Producer
 
 @{
-    ViewData["Title"] = "Details of the actor";
+    ViewData["Title"] = "Delete producer";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Details for @Model.FullName</h1>
+            <h1>Confirm Delete for: @Model.FullName</h1>
+            
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -31,7 +32,12 @@
                 </div>
 
                 <div class="form-group">
-                    <a class="btn btn-outline-success float-right btn-sm" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i>  Edit</a>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" value="Confirm" class="btn btn-outline-danger float-right btn-sm">
+                            <i class="bi bi-trash"></i> Confirm
+                        </button>
+                    </form>
                     <a class="btn btn-outline-secondary btn-sm" asp-action="Index"><i class="bi bi-card-list"></i>  Show All</a>
                 </div>
             </div>
