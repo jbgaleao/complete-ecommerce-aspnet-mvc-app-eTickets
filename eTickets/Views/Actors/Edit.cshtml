@@ -15,7 +15,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group text-center">
-                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
+                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px; border:medium; border-color: #ff6a00" />
                     </div>
                     <div class="form-group">
                         <label asp-for="ProfilePictureURL" class="control-label font-weight-bold"></label>
@@ -34,8 +34,15 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
-                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                        @*<input type="submit" value="Update" class="btn btn-outline-success float-right" />*@
+
+                        <button type="submit" value="Update" class="btn btn-outline-success float-right btn-sm">
+                            <i class="bi bi-pen"></i> Update
+                        </button>
+
+                        <a class="btn btn-outline-secondary btn-sm" asp-action="Index">
+                            <i class="bi bi-card-list"></i> Show All
+                        </a>
                     </div>
                 </form>
             </div>
