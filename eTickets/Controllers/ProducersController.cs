@@ -1,9 +1,7 @@
-﻿using eTickets.Data;
-using eTickets.Data.Services;
+﻿using eTickets.Data.Services;
 using eTickets.Models;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,7 +28,9 @@ namespace eTickets.Controllers
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
             if (producerDetails == null)
+            {
                 return View("NotFound");
+            }
 
             return View(producerDetails);
         }
@@ -45,7 +45,9 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Create([Bind("ProfilePictureURL", "FullName", "Bio")] Producer producer)
         {
             if (!ModelState.IsValid)
+            {
                 return View(producer);
+            }
 
             await _service.AddAsync(producer);
             return RedirectToAction(nameof(Index));
@@ -56,7 +58,9 @@ namespace eTickets.Controllers
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
             if (producerDetails == null)
+            {
                 return View("NotFound");
+            }
 
             return View(producerDetails);
         }
@@ -65,7 +69,9 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id", "ProfilePictureURL", "FullName", "Bio")] Producer producer)
         {
             if (!ModelState.IsValid)
+            {
                 return View(producer);
+            }
 
             if (id == producer.Id)
             {
@@ -87,7 +93,9 @@ namespace eTickets.Controllers
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
             if (producerDetails == null)
+            {
                 return View("NotFound");
+            }
 
             return View(producerDetails);
         }
@@ -96,8 +104,8 @@ namespace eTickets.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var producerDetails = await _service.GetByIdAsync(id);
-            if (producerDetails==null)
+            Producer producerDetails = await _service.GetByIdAsync(id);
+            if (producerDetails == null)
             {
                 return View("NotFound");
             }
