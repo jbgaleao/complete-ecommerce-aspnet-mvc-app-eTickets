@@ -1,27 +1,27 @@
-﻿using eTickets.Data.Base;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
+using eTickets.Data.Base;
 
 namespace eTickets.Models
 {
     public class Cinema : IEntityBase
     {
         [Key]
-        public int Id { get; set; }
+        public System.Int32 Id { get; set; }
 
         [Display(Name = "Logo Picture")]
         [Required(ErrorMessage = "Logo Picture is required")]
-        public string Logo { get; set; }
+        public System.String Logo { get; set; }
 
         [Display(Name = "Cinema Name")]
         [Required(ErrorMessage = "Cinema Name is required")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "The Cinema Name must be between 3 and 50 chars!")]
-        public string Name { get; set; }
+        public System.String Name { get; set; }
 
         [Display(Name = "Description")]
         [Required(ErrorMessage = "Cinema Description is required")]
-        public string Description { get; set; }
+        public System.String Description { get; set; }
 
 
         //Relationships

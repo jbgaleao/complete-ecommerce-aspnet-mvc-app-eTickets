@@ -2,8 +2,8 @@ namespace eTickets.Models
 {
     public class ErrorViewModel
     {
-        public string RequestId { get; set; }
+        public System.String RequestId { get; set; }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public System.Boolean ShowRequestId => !System.String.IsNullOrEmpty(RequestId);
     }
 }

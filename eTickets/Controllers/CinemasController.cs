@@ -1,12 +1,10 @@
-﻿using eTickets.Data;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using eTickets.Data.Services;
 using eTickets.Models;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace eTickets.Controllers
 {
@@ -17,10 +15,7 @@ namespace eTickets.Controllers
 
         private readonly ICinemasService _service;
 
-        public CinemasController(ICinemasService service)
-        {
-            _service = service;
-        }
+        public CinemasController(ICinemasService service) => _service = service;
 
         #endregion
 
@@ -32,15 +27,12 @@ namespace eTickets.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
         {
-            if (!ModelState.IsValid)
+            if ( !ModelState.IsValid )
                 return View(cinema);
 
             await _service.AddAsync(cinema);
@@ -48,31 +40,24 @@ namespace eTickets.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(System.Int32 id)
         {
-            var cinemaDetails = await _service.GetByIdAsync(id);
-            if (cinemaDetails == null) return View("NotFound");
-            return View(cinemaDetails);
-
+            Cinema cinemaDetails = await _service.GetByIdAsync(id);
+            return cinemaDetails == null ? View("NotFound") : View(cinemaDetails);
         }
 
         //Get: Cinema/Edit/1
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(System.Int32 id)
         {
             Cinema cinemaDetails = await _service.GetByIdAsync(id);
-            if (cinemaDetails == null)
-            {
-                return View("NotFound");
-            }
-
-            return View(cinemaDetails);
+            return cinemaDetails == null ? View("NotFound") : View(cinemaDetails);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Logo,Name,Description")] Cinema cinema)
+        public async Task<IActionResult> Edit(System.Int32 id, [Bind("Id,Logo,Name,Description")] Cinema cinema)
         {
-            if (!ModelState.IsValid)
+            if ( !ModelState.IsValid )
             {
                 return View(cinema);
             }
@@ -82,22 +67,17 @@ namespace eTickets.Controllers
 
         //Get: Cinema/Delete/1
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(System.Int32 id)
         {
             Cinema cinemaDetails = await _service.GetByIdAsync(id);
-            if (cinemaDetails == null)
-            {
-                return View("NotFound");
-            }
-
-            return View(cinemaDetails);
+            return cinemaDetails == null ? View("NotFound") : View(cinemaDetails);
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(System.Int32 id)
         {
             Cinema cinemaDetails = await _service.GetByIdAsync(id);
-            if (cinemaDetails == null)
+            if ( cinemaDetails == null )
             {
                 return View("NotFound");
             }

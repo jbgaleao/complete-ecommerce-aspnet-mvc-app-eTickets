@@ -1,32 +1,47 @@
-﻿using eTickets.Data;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using eTickets.Data.Services;
 using eTickets.Models;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eTickets.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly AppDbContext _context;
+        #region Construtor e Injeção Dependência
+        private readonly IMoviesService _service;
+        public MoviesController(IMoviesService service) => _service = service;
+        #endregion
 
-        public MoviesController(AppDbContext context)
-        {
-            _context = context;
-        }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<Movie> allMovies = await _context.MOVIES
-                .Include(c => c.Cinema)
-                .OrderBy(n => n.Name)
-                .ToListAsync();
-
+            IEnumerable<Movie> allMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(allMovies);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var movieDetail = await _service.GetMovieByIdAsync(id);
+            return View(movieDetail);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+
+            ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+            ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+            ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+            return View();
+        }
+
     }
 }

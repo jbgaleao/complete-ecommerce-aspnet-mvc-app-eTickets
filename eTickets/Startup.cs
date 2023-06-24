@@ -12,10 +12,7 @@ namespace eTickets
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -34,6 +31,7 @@ namespace eTickets
             services.AddScoped<IActorsService, ActorService>();
             services.AddScoped<IProducersService, ProducersService>();
             services.AddScoped<ICinemasService, CinemasService>();
+            services.AddScoped<IMoviesService, MoviesService>();
 
             #endregion
 
@@ -44,7 +42,7 @@ namespace eTickets
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if ( env.IsDevelopment() )
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -61,12 +59,9 @@ namespace eTickets
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
+            app.UseEndpoints(endpoints => endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+                    pattern: "{controller=Home}/{action=Index}/{id?}"));
 
             //SEEDING THE DATABASE
             AppDbInitializer.Seed(app);

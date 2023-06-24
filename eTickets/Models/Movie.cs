@@ -1,20 +1,21 @@
-﻿using eTickets.Data.Enums;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using eTickets.Data.Base;
+using eTickets.Data.Enums;
+
 namespace eTickets.Models
 {
-    public class Movie
+    public class Movie : IEntityBase
     {
         [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
-        public string ImageURL { get; set; }
+        public Int32 Id { get; set; }
+        public String Name { get; set; }
+        public String Description { get; set; }
+        public Double Price { get; set; }
+        public String ImageURL { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public MovieCategory MovieCategory { get; set; }
@@ -25,12 +26,12 @@ namespace eTickets.Models
 
         //  Cinema
         [ForeignKey("CinemaId")]
-        public int CinemaId { get; set; }
+        public Int32 CinemaId { get; set; }
         public Cinema Cinema { get; set; }
 
         //  Producer
         [ForeignKey("ProducerId")]
-        public int ProducerId { get; set; }
+        public Int32 ProducerId { get; set; }
         public Producer Producer { get; set; }
 
 

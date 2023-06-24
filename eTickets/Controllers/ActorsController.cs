@@ -1,10 +1,10 @@
-﻿using eTickets.Data.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using eTickets.Data.Services;
 using eTickets.Models;
 
 using Microsoft.AspNetCore.Mvc;
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace eTickets.Controllers
 {
@@ -12,10 +12,7 @@ namespace eTickets.Controllers
     {
         private readonly IActorsService _service;
 
-        public ActorsController(IActorsService service)
-        {
-            _service = service;
-        }
+        public ActorsController(IActorsService service) => _service = service;
 
         public async Task<IActionResult> Index()
         {
@@ -24,15 +21,12 @@ namespace eTickets.Controllers
         }
 
         //Get: Actors/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            if (!ModelState.IsValid)
+            if ( !ModelState.IsValid )
             {
                 return View(actor);
             }
@@ -41,34 +35,24 @@ namespace eTickets.Controllers
         }
 
         //Get: Actors/Details/1
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(System.Int32 id)
         {
             Actor actorDetails = await _service.GetByIdAsync(id);
 
-            if (actorDetails == null)
-            {
-                return View("NotFound");
-            }
-
-            return View(actorDetails);
+            return actorDetails == null ? View("NotFound") : View(actorDetails);
         }
 
         //Get: Actors/Edit/1
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(System.Int32 id)
         {
             Actor actorDetails = await _service.GetByIdAsync(id);
-            if (actorDetails == null)
-            {
-                return View("NotFound");
-            }
-
-            return View(actorDetails);
+            return actorDetails == null ? View("NotFound") : View(actorDetails);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        public async Task<IActionResult> Edit(System.Int32 id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            if (!ModelState.IsValid)
+            if ( !ModelState.IsValid )
             {
                 return View(actor);
             }
@@ -77,22 +61,17 @@ namespace eTickets.Controllers
         }
 
         //Get: Actors/Delete/1
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(System.Int32 id)
         {
             Actor actorDetails = await _service.GetByIdAsync(id);
-            if (actorDetails == null)
-            {
-                return View("NotFound");
-            }
-
-            return View(actorDetails);
+            return actorDetails == null ? View("NotFound") : View(actorDetails);
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(System.Int32 id)
         {
             Actor actorDetails = await _service.GetByIdAsync(id);
-            if (actorDetails == null)
+            if ( actorDetails == null )
             {
                 return View("NotFound");
             }
