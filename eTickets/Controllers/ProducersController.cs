@@ -12,7 +12,10 @@ namespace eTickets.Controllers
     {
         private readonly IProducersService _service;
 
-        public ProducersController(IProducersService service) => _service = service;
+        public ProducersController(IProducersService service)
+        {
+            _service = service;
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -21,19 +24,22 @@ namespace eTickets.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(System.Int32 id)
+        public async Task<IActionResult> Details(int id)
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
             return producerDetails == null ? View("NotFound") : View(producerDetails);
         }
 
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create([Bind("ProfilePictureURL,FullName,Bio")] Producer producer)
         {
-            if ( !ModelState.IsValid )
+            if (!ModelState.IsValid)
             {
                 return View(producer);
             }
@@ -43,21 +49,21 @@ namespace eTickets.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(System.Int32 id)
+        public async Task<IActionResult> Edit(int id)
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
             return producerDetails == null ? View("NotFound") : View(producerDetails);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(System.Int32 id, [Bind("Id,ProfilePictureURL,FullName,Bio")] Producer producer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePictureURL,FullName,Bio")] Producer producer)
         {
-            if ( !ModelState.IsValid )
+            if (!ModelState.IsValid)
             {
                 return View(producer);
             }
 
-            if ( id == producer.Id )
+            if (id == producer.Id)
             {
                 await _service.UpdateAsync(id, producer);
                 return RedirectToAction(nameof(Index));
@@ -73,7 +79,7 @@ namespace eTickets.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Delete(System.Int32 id)
+        public async Task<IActionResult> Delete(int id)
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
             return producerDetails == null ? View("NotFound") : View(producerDetails);
@@ -81,10 +87,10 @@ namespace eTickets.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(System.Int32 id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Producer producerDetails = await _service.GetByIdAsync(id);
-            if ( producerDetails == null )
+            if (producerDetails == null)
             {
                 return View("NotFound");
             }

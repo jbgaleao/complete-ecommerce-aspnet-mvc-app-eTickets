@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using eTickets.Data.Services;
+using eTickets.Data.ViewModels;
 using eTickets.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,10 @@ namespace eTickets.Controllers
     {
         #region Construtor e Injeção Dependência
         private readonly IMoviesService _service;
-        public MoviesController(IMoviesService service) => _service = service;
+        public MoviesController(IMoviesService service)
+        {
+            _service = service;
+        }
         #endregion
 
 
@@ -27,20 +31,38 @@ namespace eTickets.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var movieDetail = await _service.GetMovieByIdAsync(id);
+            Movie movieDetail = await _service.GetMovieByIdAsync(id);
             return View(movieDetail);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+            Data.ViewModels.NewMovieDropdownsVM movieDropdownsData = await _service.GetNewMovieDropdownsValues();
 
             ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
             ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
             ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
 
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(NewMovieVM movie)
+        {
+            if (!ModelState.IsValid)
+            {
+                var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+
+                ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+                ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+                ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+                return View(movie);
+            }
+
+            await _service.AddNewMovieAsync(movie);
+            return RedirectToAction(nameof(Index));
         }
 
     }

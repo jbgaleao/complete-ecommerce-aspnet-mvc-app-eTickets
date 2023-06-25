@@ -12,7 +12,10 @@ namespace eTickets
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public IConfiguration Configuration { get; }
 
@@ -42,7 +45,7 @@ namespace eTickets
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if ( env.IsDevelopment() )
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

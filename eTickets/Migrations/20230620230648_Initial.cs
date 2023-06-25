@@ -12,11 +12,11 @@ namespace eTickets.Migrations
                 name: "ACTORS",
                 columns: table => new
                 {
-                    Id = table.Column<Int32>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfilePictureURL = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    FullName = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    Bio = table.Column<String>(type: "nvarchar(max)", nullable: true)
+                    ProfilePictureURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table => table.PrimaryKey("PK_ACTORS", x => x.Id));
 
@@ -24,11 +24,11 @@ namespace eTickets.Migrations
                 name: "CINEMAS",
                 columns: table => new
                 {
-                    Id = table.Column<Int32>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Logo = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<String>(type: "nvarchar(max)", nullable: true)
+                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table => table.PrimaryKey("PK_CINEMAS", x => x.Id));
 
@@ -36,11 +36,11 @@ namespace eTickets.Migrations
                 name: "PRODUCERS",
                 columns: table => new
                 {
-                    Id = table.Column<Int32>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfilePictureURL = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    FullName = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    Bio = table.Column<String>(type: "nvarchar(max)", nullable: true)
+                    ProfilePictureURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table => table.PrimaryKey("PK_PRODUCERS", x => x.Id));
 
@@ -48,17 +48,17 @@ namespace eTickets.Migrations
                 name: "MOVIES",
                 columns: table => new
                 {
-                    Id = table.Column<Int32>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<String>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<Double>(type: "float", nullable: false),
-                    ImageURL = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SatrtDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MovieCategory = table.Column<Int32>(type: "int", nullable: false),
-                    CinemaId = table.Column<Int32>(type: "int", nullable: false),
-                    ProducerId = table.Column<Int32>(type: "int", nullable: false)
+                    MovieCategory = table.Column<int>(type: "int", nullable: false),
+                    CinemaId = table.Column<int>(type: "int", nullable: false),
+                    ProducerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,8 +81,8 @@ namespace eTickets.Migrations
                 name: "ACTORS_MOVIES",
                 columns: table => new
                 {
-                    MovieId = table.Column<Int32>(type: "int", nullable: false),
-                    ActorId = table.Column<Int32>(type: "int", nullable: false)
+                    MovieId = table.Column<int>(type: "int", nullable: false),
+                    ActorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

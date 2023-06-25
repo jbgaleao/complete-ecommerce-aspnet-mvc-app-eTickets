@@ -11,11 +11,11 @@ namespace eTickets.Models
     public class Movie : IEntityBase
     {
         [Key]
-        public Int32 Id { get; set; }
-        public String Name { get; set; }
-        public String Description { get; set; }
-        public Double Price { get; set; }
-        public String ImageURL { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public string ImageURL { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public MovieCategory MovieCategory { get; set; }
@@ -26,12 +26,12 @@ namespace eTickets.Models
 
         //  Cinema
         [ForeignKey("CinemaId")]
-        public Int32 CinemaId { get; set; }
+        public int CinemaId { get; set; }
         public Cinema Cinema { get; set; }
 
         //  Producer
         [ForeignKey("ProducerId")]
-        public Int32 ProducerId { get; set; }
+        public int ProducerId { get; set; }
         public Producer Producer { get; set; }
 
 

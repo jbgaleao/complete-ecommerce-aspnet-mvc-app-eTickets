@@ -14,14 +14,14 @@ namespace eTickets.Data
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
-            using ( IServiceScope serviceScope = applicationBuilder.ApplicationServices.CreateScope() )
+            using (IServiceScope serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
                 context.Database.EnsureCreated();
 
                 //Cinema
-                if ( !context.CINEMAS.Any() )
+                if (!context.CINEMAS.Any())
                 {
                     context.CINEMAS.AddRange(new List<Cinema>()
                     {
@@ -59,7 +59,7 @@ namespace eTickets.Data
                     context.SaveChanges();
                 }
                 //Actors
-                if ( !context.ACTORS.Any() )
+                if (!context.ACTORS.Any())
                 {
                     context.ACTORS.AddRange(new List<Actor>()
                     {
@@ -98,7 +98,7 @@ namespace eTickets.Data
                     context.SaveChanges();
                 }
                 //Producers
-                if ( !context.PRODUCERS.Any() )
+                if (!context.PRODUCERS.Any())
                 {
                     context.PRODUCERS.AddRange(new List<Producer>()
                     {
@@ -137,7 +137,7 @@ namespace eTickets.Data
                     context.SaveChanges();
                 }
                 //Movies
-                if ( !context.MOVIES.Any() )
+                if (!context.MOVIES.Any())
                 {
                     context.MOVIES.AddRange(new List<Movie>()
                     {
@@ -217,7 +217,7 @@ namespace eTickets.Data
                     context.SaveChanges();
                 }
                 //Actors & Movies
-                if ( !context.ACTORS_MOVIES.Any() )
+                if (!context.ACTORS_MOVIES.Any())
                 {
                     context.ACTORS_MOVIES.AddRange(new List<Actor_Movie>()
                     {

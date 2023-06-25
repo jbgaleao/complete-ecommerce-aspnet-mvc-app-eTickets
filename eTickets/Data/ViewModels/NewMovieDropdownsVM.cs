@@ -1,6 +1,6 @@
-﻿using eTickets.Models;
+﻿using System.Collections.Generic;
 
-using System.Collections.Generic;
+using eTickets.Models;
 
 namespace eTickets.Data.ViewModels
 {
