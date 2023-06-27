@@ -8,6 +8,9 @@ namespace eTickets.Data.ViewModels
 {
     public class NewMovieVM
     {
+        public int Id { get; set; }
+
+
         [Required(ErrorMessage = "Name is Required")]
         [Display(Name = "Movie Name")]
         public string Name { get; set; }
@@ -18,6 +21,7 @@ namespace eTickets.Data.ViewModels
 
         [Required(ErrorMessage = "Price is Required")]
         [Display(Name = "Price")]
+        [DataType(DataType.Currency,ErrorMessage ="Format Price is wrong")]
         public double Price { get; set; }
 
         [Required(ErrorMessage = "Movie poster URL is Required")]

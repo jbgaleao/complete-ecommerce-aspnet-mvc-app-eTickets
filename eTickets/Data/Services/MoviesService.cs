@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using eTickets.Data.Base;
@@ -82,8 +83,41 @@ namespace eTickets.Data.Services
 
             return response;
         }
+        
+        public async Task UpdateMovieAsync(NewMovieVM data)
+        {
+            var dbMovie = await _context.MOVIES.FirstOrDefaultAsync(n => n.Id == data.Id);
 
+            if (dbMovie != null)
+            {
+                dbMovie.Name = data.Name;
+                dbMovie.Description = data.Description;
+                dbMovie.Price = data.Price;
+                dbMovie.ImageURL = data.ImageURL;
+                dbMovie.CinemaId = data.CinemaId;
+                dbMovie.StartDate = data.StartDate;
+                dbMovie.EndDate = data.EndDate;
+                dbMovie.MovieCategory = data.MovieCategory;
+                dbMovie.ProducerId = data.ProducerId;
+                await _context.SaveChangesAsync();
+            }
 
+            //Remove existing actors
+            List<Actor_Movie> existingActorsDb = _context.ACTORS_MOVIES.Where(n => n.MovieId == data.Id).ToList();
+            _context.ACTORS_MOVIES.RemoveRange(existingActorsDb);
+            await _context.SaveChangesAsync();
+
+            //Add Movie Actors
+            foreach (var actorId in data.ActorIds)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieId = data.Id,
+                    ActorId = actorId
+                };
+                await _context.ACTORS_MOVIES.AddAsync(newActorMovie);
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }
-
